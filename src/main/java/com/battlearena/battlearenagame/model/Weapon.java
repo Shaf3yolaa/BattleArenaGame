@@ -10,6 +10,14 @@ public abstract class Weapon {
         this.speed=speed;
         this.coolDownTime=coolDownTime;
     }
+    public int getDamage() {
+        return damage;
+    }
 
-    public abstract Projectile newProjectile(String direction);
-}
+    public int getSpeed() {
+        return speed;
+    }
+    public long getCoolDownTime() {
+        return coolDownTime;
+    }
+
