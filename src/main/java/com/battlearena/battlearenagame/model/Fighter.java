@@ -45,7 +45,7 @@ public abstract class Fighter {
 
     public boolean dead() {
 
-        return health == 0;
+        return health <= 0;
     }
 
     //getters
