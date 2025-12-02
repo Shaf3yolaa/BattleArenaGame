@@ -2,7 +2,7 @@ package com.battlearena.battlearenagame.model;
 
 public class Bow extends Weapon{
     public Bow(){
-        super(20,35,1000);
+        super("BOW",12,30,500);
     }
 
 }
