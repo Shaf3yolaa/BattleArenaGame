@@ -10,7 +10,7 @@ public abstract class Fighter {
 
     //class weapon
     protected Weapon isweapon;
-    protected boolean willshoot = true;
+    protected boolean canShoot = true;
 
     public Fighter(String name, double health, double speed) {
         this.name = name;
@@ -38,9 +38,13 @@ public abstract class Fighter {
     }
 
 
-    public double shoot() {
-
-
+    public Projectile shoot(String direction) {
+        if(!canShoot||isweapon==null){
+            return null;
+        }
+        else {
+            return isweapon.newProjectile(direction);
+        }
     }
 
     public void takedamage(double damage) {
