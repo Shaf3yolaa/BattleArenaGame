@@ -48,6 +48,17 @@ public abstract class Fighter {
         return health <= 0;
     }
 
+    //setters
+    public void setPosition(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    protected void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+    }
+
+
     //getters
     public String getName() {
         return name;
@@ -65,7 +76,7 @@ public abstract class Fighter {
         return y;
     }
 
-    public Weapon getweapon() {
+    public Weapon getWeapon() {
         return weapon;
     }
 
