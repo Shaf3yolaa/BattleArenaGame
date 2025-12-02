@@ -1,4 +1,4 @@
-package BattleArenaGame;
+package com.battlearena.battlearenagame.model;
 public abstract class Fighter {
 
     protected String name;
@@ -17,24 +17,17 @@ public abstract class Fighter {
         this.speed=speed;
         this.x=0;
         this.y=0;
-
     }
 
     //move of fighter
-    public void moveup(){
-       y-=speed;
-    }
-    public void movedown(){
-        y+=speed;
-    }
-    public void moveright(){
-        x+=speed
-    }
+    public void moveup(){y-=speed;}
+    public void movedown(){y+=speed;}
+    public void moveright(){x+=speed;}
     public void moveleft(){
         x-=speed;
     }
-    public double shoot(){
 
+    public double shoot(){
 
     }
 
