@@ -9,7 +9,7 @@ public abstract class Fighter {
     protected double y;
 
     //class weapon
-    protected Weapon isweapon;
+    protected Weapon weapon;
     protected boolean canShoot = true;
 
     public Fighter(String name, double health, double speed) {
@@ -36,9 +36,6 @@ public abstract class Fighter {
     public void moveleft() {
         x -= speed;
     }
-
-
-
 
     public void takedamage(double damage) {
         health -= damage;
@@ -68,8 +65,8 @@ public abstract class Fighter {
         return y;
     }
 
-    public Weapon getIsweapon() {
-        return isweapon;
+    public Weapon getweapon() {
+        return weapon;
     }
 
 
