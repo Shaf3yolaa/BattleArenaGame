@@ -9,7 +9,7 @@ public abstract class Fighter {
     protected double y;
 
     //class weapon
-    protected Weapon isweapon;
+    protected Weapon liveweapon;
     protected boolean willshoot = true;
 
     public Fighter(String name, double health, double speed) {
@@ -37,10 +37,19 @@ public abstract class Fighter {
         x -= speed;
     }
 
+    public boolean Willshoot() {
+        return willshoot;
+    }
 
-    public double shoot() {
+    public void setWillshoot(){
+        this.willshoot=willshoot;
+    }
 
-
+    public double Projectileshoot() {
+        if(willshoot&&liveweapon!=null) {
+            return liveweapon.newProjectile();
+        }
+        return 0;
     }
 
     public void takedamage(double damage) {
@@ -71,8 +80,8 @@ public abstract class Fighter {
         return y;
     }
 
-    public Weapon getIsweapon() {
-        return isweapon;
+    public Weapon getLiveweapon() {               //class weapon
+        return liveweapon;
     }
 
 
