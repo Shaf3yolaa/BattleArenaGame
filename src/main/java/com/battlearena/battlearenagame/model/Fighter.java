@@ -38,14 +38,7 @@ public abstract class Fighter {
     }
 
 
-    public Projectile shoot(String direction) {
-        if(!canShoot||isweapon==null){
-            return null;
-        }
-        else {
-            return isweapon.newProjectile(direction);
-        }
-    }
+
 
     public void takedamage(double damage) {
         health -= damage;
