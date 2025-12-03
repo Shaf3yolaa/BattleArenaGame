@@ -1,4 +1,4 @@
-package com.battlearena.battlearenagame.model;
+package com.battlearena.battlearenagame.models;
 
 public class Cannon extends Weapon{
     public Cannon(){
