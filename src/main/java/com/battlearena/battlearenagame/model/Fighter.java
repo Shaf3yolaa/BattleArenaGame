@@ -1,84 +1,79 @@
 package com.battlearena.battlearenagame.model;
 
+import javafx.scene.shape.Rectangle;
+
 public abstract class Fighter {
 
-    protected String name;
-    protected double health;
+    protected double x, y;
+    protected int health;
     protected double speed;
-    protected double x;
-    protected double y;
-
-    //class weapon
     protected Weapon weapon;
-    protected boolean canShoot = true;
 
-    public Fighter(String name, double health, double speed) {
-        this.name = name;
+    protected int MAXHealth;
+    protected long lastShotTime = 0;
+    protected Rectangle view;
+
+    public Fighter(double x, double y, int health, double speed, Weapon weapon) {
+        this.x = x;
+        this.y = y;
         this.health = health;
         this.speed = speed;
-        this.x = 0;
-        this.y = 0;
+        this.weapon = weapon;
+
+        this.MAXHealth = health;
+        this.view = new Rectangle(40, 40);
+        this.view.setX(x);
+        this.view.setY(y);
     }
 
-    //move of fighter
+
     public void moveup() {
-        y -= speed;
+        setY(this.y - this.speed);
     }
 
     public void movedown() {
-        y += speed;
+        setY(this.y + this.speed);
     }
 
     public void moveright() {
-        x += speed;
+        setX(this.x + this.speed);
     }
 
     public void moveleft() {
-        x -= speed;
+        setX(this.x - this.speed);
     }
 
-    public void takedamage(double damage) {
-        health -= damage;
-        if (health < 0)
-            health = 0;
+    public void takeDamage(int dmg) {
+        this.health -= dmg;
+        if (this.health < 0) this.health = 0;
+    }
+    public boolean canShoot(long currentTime) {
+        if (currentTime - lastShotTime >= weapon.getCoolDownTime()) {
+            lastShotTime = currentTime;
+            return true;
+        }
+        return false;
     }
 
-    public boolean dead() {
-
+    public boolean isDead() {
         return health <= 0;
     }
 
-    //setters
-    public void setPosition(double x, double y) {
+    public double getX() { return x; }
+    public double getY() { return y; }
+
+    public void setX(double x) {
         this.x = x;
+        this.view.setX(x);
+    }
+    public void setY(double y) {
         this.y = y;
+        this.view.setY(y);
     }
 
-    protected void setWeapon(Weapon weapon) {
-        this.weapon = weapon;
-    }
-
-
-    //getters
-    public String getName() {
-        return name;
-    }
-
-    public double getHealth() {
-        return health;
-    }
-
-    public double getX() {
-        return x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public Weapon getWeapon() {
-        return weapon;
-    }
-
-
+    public Rectangle getView() { return view; }
+    public int getHealth() { return health; }
+    public int getMaxHealth() { return MAXHealth; }
+    public Weapon getWeapon() { return weapon; }
+    public double getSpeed() { return speed; }
 }

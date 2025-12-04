@@ -1,10 +1,14 @@
 package com.battlearena.battlearenagame.model;
 
+import javafx.scene.paint.Color;
+
 public class Mage extends Fighter {
 
-    public Mage(String name){
-        super("name",100,10);
-        this.weapon =new MagicWand();
+    public Mage(double startX, double startY) {
+        super(20, 20, 100, 4.0, new MagicWand());
+        this.view.setFill(Color.BLUE);
     }
+
+
 
 }
