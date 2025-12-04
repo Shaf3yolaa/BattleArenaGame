@@ -2,51 +2,47 @@ package com.battlearena.battlearenagame.physics;
 import javafx.scene.shape.Rectangle;
 
 public class projectile {
-    private double xLimt;
-    private  double yLimt;
+    private double xLimtL;
+    private  double xLimtR;
     private  double x;
     private double y;
-    private double speedPlayer;
-    private double speedwepain;
-    private double xplayer;
-    private double yplayer;
+    private double speed;
+
     private double xShoot;
     private double yShoot;
-    public projectile(double xLimt,double x,double y, double yLimt, double speedwepain, double speedPlayer,
-                      double xplayer,double yplayer,double xShoot,double yShoot) {
+
+    public boolean active = true;
+    private Rectangle view;
+    private boolean movingRight;
+
+
+    public projectile(double xLimt,double x,double y, double xLimtR, double speed,
+                      double xShoot,double yShoot  ,  boolean movingRight) {
         this.x = x;
         this.y = y;
-        this.yLimt = 200;
-        this.xLimt = 500;
-        this.speedPlayer = speedPlayer;
-        this.speedwepain = speedwepain;
-        this.xplayer = xplayer;
-        this.yplayer = 10;
+        //complete
+        this.xLimtL = 200;
+        this.xLimtR = 500;
+
+        this.speed = speed;
         this.xShoot = xShoot;
         this.yShoot = 5;
+        this.view = new Rectangle(xShoot, yShoot);
+        this.movingRight = movingRight;
+
     }
 
-    public double getXplayer() {
-        return xplayer;
+    public double getX() {
+        return x;
     }
 
-    public double getYplayer() {
-        return yplayer;
+    public double getSpeed() {
+        return speed;
     }
 
-    public Rectangle PlayerBox(double xplayer,double yplayer){
-        Rectangle r= new Rectangle();
-        r.setWidth(xplayer);
-        r.setHeight(yplayer);
-        return r ;
+    public Rectangle getView() {
+        return view;
     }
-    public Rectangle ShootBox(double xShoot,double yShoot){
-        Rectangle r= new Rectangle();
-        r.setWidth(xShoot);
-        r.setHeight(yShoot);
-        return r ;
-    }
-
 }
 
 
