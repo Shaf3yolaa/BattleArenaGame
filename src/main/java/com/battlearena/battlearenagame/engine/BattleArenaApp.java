@@ -102,9 +102,7 @@ public class BattleArenaApp extends Application {
         AnimationTimer fps60loop = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                if (gameRunning) {
-                    update(now);
-                }
+                if (gameRunning) update(now);
             }
         };
         fps60loop.start();
@@ -113,17 +111,9 @@ public class BattleArenaApp extends Application {
     private void update(long now) {
         long currentTime = System.currentTimeMillis();
 
-        physics.movePlayer1(player1,
-                activeKeys.contains(KeyCode.W),
-                activeKeys.contains(KeyCode.S),
-                activeKeys.contains(KeyCode.A),
-                activeKeys.contains(KeyCode.D));
+        physics.movePlayer1(player1, activeKeys.contains(KeyCode.W), activeKeys.contains(KeyCode.S), activeKeys.contains(KeyCode.A), activeKeys.contains(KeyCode.D));
 
-        physics.movePlayer2(player2,
-                activeKeys.contains(KeyCode.UP),
-                activeKeys.contains(KeyCode.DOWN),
-                activeKeys.contains(KeyCode.LEFT),
-                activeKeys.contains(KeyCode.RIGHT));
+        physics.movePlayer2(player2, activeKeys.contains(KeyCode.UP), activeKeys.contains(KeyCode.DOWN), activeKeys.contains(KeyCode.LEFT), activeKeys.contains(KeyCode.RIGHT));
 
         if (activeKeys.contains(KeyCode.F) && player1.canShoot(currentTime)) {
             shoot(player1, true);
