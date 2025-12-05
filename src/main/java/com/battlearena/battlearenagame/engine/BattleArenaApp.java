@@ -10,6 +10,10 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.animation.AnimationTimer;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -23,6 +27,12 @@ public class BattleArenaApp extends Application {
     private Set<KeyCode> activeKeys = new HashSet<>();
     private PhysicsEngine physics;
     private boolean gameRunning = false;
+    private Pane gameRoot;
+    private Label p1HealthLabel;
+    private Label p2HealthLabel;
+    private Stage window;
+    private Scene selectionScene;
+    private Scene gameScene;
 
     @Override
     public void start(Stage stage) {
@@ -68,33 +78,28 @@ public class BattleArenaApp extends Application {
         physics = new PhysicsEngine(800, 600);
 
         player1 = createFighter(p1Type, 60, 300);
+        player1.getView().setFill(Color.BLUE);
         player2 = createFighter(p2Type, 740, 300);
-
-        player1.getView().setFill(Color.BabyBLUE);
-        player2.getView().setFill(Color.red);
+        player2.getView().setFill(Color.RED);
 
         Line separator = new Line(400, 0, 400, 600);
 
         p1HealthLabel = new Label("P1: " + player1.getHealth());
-        p2HealthLabel = new Label("P2: " + player2.getHealth());
-
         p1HealthLabel.setLayoutX(20);
         p1HealthLabel.setLayoutY(20);
 
+        p2HealthLabel = new Label("P2: " + player2.getHealth());
         p2HealthLabel.setLayoutX(680);
         p2HealthLabel.setLayoutY(20);
 
         gameRoot.getChildren().addAll(player1.getView(), player2.getView(), p1HealthLabel, p2HealthLabel, separator);
-
         gameScene = new Scene(gameRoot);
-
         gameScene.setOnKeyPressed(e -> activeKeys.add(e.getCode()));
         gameScene.setOnKeyReleased(e -> activeKeys.remove(e.getCode()));
-
         window.setScene(gameScene);
         gameRunning = true;
 
-        AnimationTimer loop = new AnimationTimer() {
+        AnimationTimer fps60loop = new AnimationTimer() {
             @Override
             public void handle(long now) {
                 if (gameRunning) {
@@ -102,7 +107,7 @@ public class BattleArenaApp extends Application {
                 }
             }
         };
-        loop.start();
+        fps60loop.start();
     }
 
     private void update(long now) {
@@ -128,54 +133,57 @@ public class BattleArenaApp extends Application {
             shoot(player2, false);
         }
 
-        List<Projectile> removed = new ArrayList<>();
+        List<Projectile> removeBullet = new ArrayList<>();
 
-        for (Projectile p : projectiles) {
-            p.move();
+        for (Projectile bullet : projectiles) {
+            bullet.move();
 
-            if (p.getX() < 0 || p.getX() > 800) {
-                removed.add(p);
-                gameRoot.getChildren().remove(p.getView());
+            if (bullet.getX() < 0 || bullet.getX() > 800) {
+                removeBullet.add(bullet);
+                gameRoot.getChildren().remove(bullet.getView());
                 continue;
             }
 
-            if (physics.checkCollision(p, player1) && p.active && p.isMovingRight() == false) {
-                player1.takeDamage(p.getDamage());
-                p.active = false;
-                removed.add(p);
-                gameRoot.getChildren().remove(p.getView());
+            if (physics.checkCollision(bullet, player1) && bullet.active && bullet.isMovingRight() == false) {
+                player1.takeDamage(bullet.getDamage());
+                bullet.active = false;
+                removeBullet.add(bullet);
+                gameRoot.getChildren().remove(bullet.getView());
             }
 
-            if (physics.checkCollision(p, player2) && p.active && p.isMovingRight() == true) {
-                player2.takeDamage(p.getDamage());
-                p.active = false;
-                removed.add(p);
-                gameRoot.getChildren().remove(p.getView());
+            if (physics.checkCollision(bullet, player2) && bullet.active && bullet.isMovingRight() == true) {
+                player2.takeDamage(bullet.getDamage());
+                bullet.active = false;
+                removeBullet.add(bullet);
+                gameRoot.getChildren().remove(bullet.getView());
             }
         }
 
-        projectiles.removeAll(removed);
+        projectiles.removeAll(removeBullet);
 
         p1HealthLabel.setText("P1: " + player1.getHealth());
         p2HealthLabel.setText("P2: " + player2.getHealth());
 
+        if (player1.getHealth() <= 0) endGame("Player 2 Wins!");
+        if (player2.getHealth() <= 0) endGame("Player 1 Wins!");
+    }
 
-        private void shoot (Fighter shooter,boolean right){
-            double startX = right ? shooter.getX() + 45 : shooter.getX() - 10;
-            double startY = shooter.getY() + 20;
+    private void shoot(Fighter shooter, boolean moveRight) {
+        double startX = moveRight ? shooter.getX() + 45 : shooter.getX() - 10;
+        double startY = shooter.getY() + 20;
 
-            Projectile bullet = new Projectile(
-                    startX,
-                    startY,
-                    shooter.getWeapon().getProjectileSpeed(),
-                    shooter.getWeapon().getDamage(),
-                    right
-            );
+        Projectile bullet = new Projectile(startX, startY, shooter.getWeapon().getProjectileSpeed(), shooter.getWeapon().getDamage(), moveRight);
 
-            projectiles.add(bullet);
-            gameRoot.getChildren().add(bullet.getView());
-        }
+        projectiles.add(bullet);
+        gameRoot.getChildren().add(bullet.getView());
+    }
 
-
+    private void endGame(String message) {
+        gameRunning = false;
+        Label winLabel = new Label(message);
+        winLabel.setStyle("-fx-font-size: 40px; -fx-text-fill: green; -fx-font-weight: bold; -fx-background-color: white; -fx-padding: 10px;");
+        winLabel.setLayoutX(250);
+        winLabel.setLayoutY(250);
+        gameRoot.getChildren().add(winLabel);
     }
 }
