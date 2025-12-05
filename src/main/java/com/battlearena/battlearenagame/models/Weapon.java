@@ -12,19 +12,15 @@ public abstract class Weapon {
         this.speed = speed;
         this.coolDownTime = coolDownTime;
     }
-
     public String getName(){
         return name;
     }
-
     public int getDamage() {
         return damage;
     }
-
     public int getSpeed() {
         return speed;
     }
-
     public long getCoolDownTime() {
         return coolDownTime;
     }

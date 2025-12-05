@@ -2,6 +2,6 @@ package com.battlearena.battlearenagame.models;
 
 public class MagicWand extends Weapon{
     public MagicWand(){
-        super("MAGIC WAND",12,30,500);
+        super("Magic Wand",25,5,1200);
     }
 }
