@@ -70,6 +70,15 @@ public class projectile {
             }
         }
     }
+    public boolean isOutOfBounds() {
+
+        if (movingRight) {
+            return x > xLimtR;
+        } else {
+            return x < xLimtL;
+        }
+    }
+    
 }
 
 
