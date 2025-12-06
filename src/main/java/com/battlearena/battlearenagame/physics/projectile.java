@@ -45,40 +45,47 @@ public class projectile {
     }
 
     public void move() {
-        if (!active) {
-            return;
+      if (!active) {
+       return;
         }
 
-        if (movingRight) {
-            x = x + speed;
-        } else {
-            x = x - speed;
+    if (movingRight) {
+
+      x = x + speed;
+    }
+    else {
+      x = x - speed;
         }
     }
     public void limit() {
-        if (!active) {
-            return;
+     if (!active) {
+       return;
         }
 
-        if (movingRight) {
-            if (x >= xLimtR) {
-                active = false;
+     if (movingRight) {
+
+      if (x >= xLimtR) {
+        active = false;
             }
-        } else {
-            if (x <= xLimtL) {
-                active = false;
-            }
+        }
+        else {
+
+      if (x <= xLimtL) {
+
+      active = false;
+       }
         }
     }
     public boolean isOutOfBounds() {
 
-        if (movingRight) {
-            return x > xLimtR;
-        } else {
-            return x < xLimtL;
-        }
+    if (movingRight) {
+    return x > xLimtR;
+   }
+    else {
+        return x < xLimtL;
+      }
     }
-    
+
 }
 
 
