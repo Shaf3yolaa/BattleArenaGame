@@ -43,6 +43,33 @@ public class projectile {
     public Rectangle getView() {
         return view;
     }
+
+    public void move() {
+        if (!active) {
+            return;
+        }
+
+        if (movingRight) {
+            x = x + speed;
+        } else {
+            x = x - speed;
+        }
+    }
+    public void limit() {
+        if (!active) {
+            return;
+        }
+
+        if (movingRight) {
+            if (x >= xLimtR) {
+                active = false;
+            }
+        } else {
+            if (x <= xLimtL) {
+                active = false;
+            }
+        }
+    }
 }
 
 
