@@ -60,14 +60,14 @@ public void movePlayer2(Player p2, boolean up, boolean down, boolean left, boole
         nextX += speed;
 
 
-    if (nextX < width / 2)
-        nextX = width / 2;
-    if (nextX > width - 40)
-        nextX = width - 40;
+    if (nextX < w / 2)
+        nextX = w / 2;
+    if (nextX > w - 40)
+        nextX = w - 40;
     if (nextY < 0)
         nextY = 0;
-    if (nextY > height - 40)
-        nextY = height - 40;
+    if (nextY > h - 40)
+        nextY = h - 40;
 
     p2.setX(nextX);
     p2.setY(nextY);
