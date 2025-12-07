@@ -1,6 +1,6 @@
 package com.battlearena.battlearenagame.models;
 
-public abstract class Weapon {
+public class Weapon {
     private String name;
     private int damage;
     private int speed;
