@@ -1,33 +1,24 @@
 package com.battlearena.battlearenagame.physics;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Circle;
 
-public class projectile {
-    private double xLimtL;
-    private  double xLimtR;
+public class Projectile {
     private  double x;
     private double y;
     private double speed;
-
-    private double xShoot;
-    private double yShoot;
+    private  double damage;
 
     public boolean active = true;
-    private Rectangle view;
+    private Circle view;
     private boolean movingRight;
 
 
-    public projectile(double xLimt,double x,double y, double xLimtR, double speed,
-                      double xShoot,double yShoot  ,  boolean movingRight) {
+    public Projectile(double x,double y, double speed, boolean movingRight,Circle view,double damage) {
         this.x = x;
         this.y = y;
+        this.damage=damage;
         //complete
-        this.xLimtL = 200;
-        this.xLimtR = 500;
-
         this.speed = speed;
-        this.xShoot = xShoot;
-        this.yShoot = 5;
-        this.view = new Rectangle(xShoot, yShoot);
+        this.view = new Circle(x, y,5);
         this.movingRight = movingRight;
 
     }
@@ -36,11 +27,17 @@ public class projectile {
         return x;
     }
 
+    public double getY(){return y;}
+
+    public double getDamage() {
+        return damage;
+    }
+
     public double getSpeed() {
         return speed;
     }
 
-    public Rectangle getView() {
+    public Circle getView() {
         return view;
     }
 
@@ -57,41 +54,15 @@ public class projectile {
       x = x - speed;
         }
     }
-    public void limit() {
-     if (!active) {
-       return;
-        }
 
-     if (movingRight) {
 
-      if (x >= xLimtR) {
-        active = false;
-            }
-        }
-        else {
-
-      if (x <= xLimtL) {
-
-      active = false;
-       }
-        }
-    }
-    public boolean isOutOfBounds() {
-
-    if (movingRight) {
-    return x > xLimtR;
-   }
-    else {
-        return x < xLimtL;
-      }
-    }
-    public boolean checkCollision(Player player){
+    public boolean checkCollision(Projectile bullet,Fighter Target){
 
         if (!active) {
             return false;
         }
-        double distanceX = Math.abs(x - player.getX());
-        double distanceY = Math.abs(y - player.getY());
+        double distanceX = Math.abs(x - Target.getX());
+        double distanceY = Math.abs(y - Target.getY());
 
         return distanceX < 25 && distanceY < 25;
 

@@ -4,20 +4,14 @@ public class PhysicsEngine  {
 private double w;
 private double h;
 
-//class player
-private double player1;
-    private double X;
-    private double Y;
-    private double speed;
 
+    public PhysicsEngine(double w,double h) {
 
-    public PhysicsEngine(double w,double h,Player X ,Player Y , Player speed) {
-        super(speed,Y,X);
         this.w = w;
         this.h = h;
     }
 
-}
+
     public void movePlayer1(Player p1, boolean up, boolean down, boolean left, boolean right) {
         double nextX = p1.getX();
         double nextY = p1.getY();
@@ -71,4 +65,4 @@ public void movePlayer2(Player p2, boolean up, boolean down, boolean left, boole
 
     p2.setX(nextX);
     p2.setY(nextY);
-}
+}}
