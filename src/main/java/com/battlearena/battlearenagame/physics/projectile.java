@@ -85,6 +85,18 @@ public class projectile {
         return x < xLimtL;
       }
     }
+    public boolean checkCollision(Player player){
+
+        if (!active) {
+            return false;
+        }
+        double distanceX = Math.abs(x - player.getX());
+        double distanceY = Math.abs(y - player.getY());
+
+        return distanceX < 25 && distanceY < 25;
+
+    }
+
 
 }
 
