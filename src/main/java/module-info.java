@@ -3,7 +3,6 @@ module com.battlearena.battlearenagame {
     requires javafx.fxml;
     requires javafx.graphics;
 
-
-    opens com.battlearena.battlearenagame to javafx.fxml;
-    exports com.battlearena.battlearenagame;
+    exports com.battlearena.battlearenagame.engine;
+    exports com.battlearena.battlearenagame.models;
 }
