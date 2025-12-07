@@ -71,14 +71,16 @@ public class PhysicsEngine {
     }
 
     public boolean checkCollision(Projectile bullet, Fighter target) {
+        if (!bullet.active) return false;
 
-        if (!bullet.active) {
-            return false;
-        }
+        double bulletX = bullet.getX();
+        double bulletY = bullet.getY();
 
-        double distanceX = Math.abs(bullet.getX() - target.getX());
-        double distanceY = Math.abs(bullet.getY() - target.getY());
-
-        return distanceX < 25 && distanceY < 25;
+        double targetX = target.getX();
+        double targetY = target.getY();
+        double targetW = target.getView().getWidth();
+        double targetH = target.getView().getHeight();
+        return (bulletX >= targetX && bulletX <= targetX + targetW) && (bulletY >= targetY && bulletY <= targetY + targetH);
     }
+
 }
