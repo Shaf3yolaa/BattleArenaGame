@@ -1,6 +1,6 @@
 package com.battlearena.battlearenagame.model;
 
-public class PhysicsEngine extends Player {
+public class PhysicsEngine  {
 private double w;
 private double h;
 
