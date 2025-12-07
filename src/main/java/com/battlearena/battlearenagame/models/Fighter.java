@@ -4,29 +4,27 @@ import javafx.scene.shape.Rectangle;
 
 public abstract class Fighter {
 
+    protected String name;
     protected double x, y;
     protected int health;
     protected double speed;
     protected Weapon weapon;
-
-    protected int MAXHealth;
-    protected long lastShotTime = 0;
+    protected long lastShot_cdt = 0;
     protected Rectangle view;
 
-    public Fighter(double x, double y, int health, double speed, Weapon weapon) {
+    public Fighter(String name, double x, double y, int health, double speed, Weapon weapon) {
+        this.name = name;
         this.x = x;
         this.y = y;
         this.health = health;
         this.speed = speed;
         this.weapon = weapon;
-
-        this.MAXHealth = health;
         this.view = new Rectangle(40, 40);
         this.view.setX(x);
         this.view.setY(y);
     }
 
-
+//------------------------------------------------------------------------------------  motion of fighter
     public void moveup() {
         setY(this.y - this.speed);
     }
@@ -47,18 +45,23 @@ public abstract class Fighter {
         this.health -= dmg;
         if (this.health < 0) this.health = 0;
     }
+    //-------------------------------------------------------------------------------shot
+    public abstract void shoot();
+
     public boolean canShoot(long currentTime) {
-        if (currentTime - lastShotTime >= weapon.getCoolDownTime()) {
-            lastShotTime = currentTime;
-            return true;
-        }
-        return false;
+        return (currentTime - lastShot_cdt) >= weapon.getCoolDownTime();
     }
+    public void recordShotTime(long currentTime) {
+        this.lastShot_cdt = currentTime;
+    }
+
 
     public boolean isDead() {
         return health <= 0;
     }
 
+    // ---------------------------------------------------------------------Getters and Setters
+    public String getName() { return name; }
     public double getX() { return x; }
     public double getY() { return y; }
 
@@ -73,7 +76,6 @@ public abstract class Fighter {
 
     public Rectangle getView() { return view; }
     public int getHealth() { return health; }
-    public int getMaxHealth() { return MAXHealth; }
     public Weapon getWeapon() { return weapon; }
     public double getSpeed() { return speed; }
 }
