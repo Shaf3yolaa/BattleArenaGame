@@ -41,11 +41,11 @@ public abstract class Fighter {
         setX(this.x - this.speed);
     }
 
+    //-------------------------------------------------------------------------------shot & damage
     public void takeDamage(int dmg) {
         this.health -= dmg;
         if (this.health < 0) this.health = 0;
     }
-    //-------------------------------------------------------------------------------shot
     public abstract void shoot();
 
     public boolean canShoot(long currentTime) {

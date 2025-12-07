@@ -7,7 +7,7 @@ public class Warrior extends Fighter {
     private static final String Defaultname = "Warrior";
 
     public Warrior(double startX, double startY) {
-        super(Defaultname, startX, startY, 100, 3.0, new Pistol());
+        super(Defaultname, startX, startY, 100, 5, new Pistol());
         this.view.setFill(Color.YELLOW);
     }
 
