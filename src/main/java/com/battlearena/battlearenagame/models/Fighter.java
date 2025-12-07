@@ -9,7 +9,7 @@ public abstract class Fighter {
     protected int health;
     protected double speed;
     protected Weapon weapon;
-    protected long lastShot_cdt = 0;
+    protected long lastShotcdt = 0;
     protected Rectangle view;
 
     public Fighter(String name, double x, double y, int health, double speed, Weapon weapon) {
@@ -24,23 +24,6 @@ public abstract class Fighter {
         this.view.setY(y);
     }
 
-//------------------------------------------------------------------------------------  motion of fighter
-    public void moveup() {
-        setY(this.y - this.speed);
-    }
-
-    public void movedown() {
-        setY(this.y + this.speed);
-    }
-
-    public void moveright() {
-        setX(this.x + this.speed);
-    }
-
-    public void moveleft() {
-        setX(this.x - this.speed);
-    }
-
     //-------------------------------------------------------------------------------shot & damage
     public void takeDamage(int dmg) {
         this.health -= dmg;
@@ -49,10 +32,14 @@ public abstract class Fighter {
     public abstract void shoot();
 
     public boolean canShoot(long currentTime) {
-        return (currentTime - lastShot_cdt) >= weapon.getCoolDownTime();
+        if (currentTime - lastShotcdt >= weapon.getCoolDownTime()) {
+            lastShotcdt = currentTime;
+            return true;
+        }
+        return false;
     }
     public void recordShotTime(long currentTime) {
-        this.lastShot_cdt = currentTime;
+        this.lastShotcdt = currentTime;
     }
 
 

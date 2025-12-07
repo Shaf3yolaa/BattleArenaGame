@@ -134,14 +134,14 @@ public class BattleArenaApp extends Application {
                 continue;
             }
 
-            if (physics.checkCollision(bullet, player1) && bullet.active && bullet.isMovingRight() == false) {
+            if (physics.checkCollision(bullet, player1) && bullet.active && bullet.movingRight() == false) {
                 player1.takeDamage(bullet.getDamage());
                 bullet.active = false;
                 removeBullet.add(bullet);
                 gameRoot.getChildren().remove(bullet.getView());
             }
 
-            if (physics.checkCollision(bullet, player2) && bullet.active && bullet.isMovingRight() == true) {
+            if (physics.checkCollision(bullet, player2) && bullet.active && bullet.movingRight() == true) {
                 player2.takeDamage(bullet.getDamage());
                 bullet.active = false;
                 removeBullet.add(bullet);
@@ -158,11 +158,11 @@ public class BattleArenaApp extends Application {
         if (player2.getHealth() <= 0) endGame("Player 1 Wins!");
     }
 
-    private void shoot(Fighter shooter, boolean moveRight) {
-        double startX = moveRight ? shooter.getX() + 45 : shooter.getX() - 10;
+    private void shoot(Fighter shooter, boolean movingRight) {
+        double startX = movingRight ? shooter.getX() + 45 : shooter.getX() - 10;
         double startY = shooter.getY() + 20;
 
-        Projectile bullet = new Projectile(startX, startY, shooter.getWeapon().getProjectileSpeed(), shooter.getWeapon().getDamage(), moveRight);
+        Projectile bullet = new Projectile(startX, startY, shooter.getWeapon().getSpeed(), shooter.getWeapon().getDamage(), movingRight);
 
         projectiles.add(bullet);
         gameRoot.getChildren().add(bullet.getView());

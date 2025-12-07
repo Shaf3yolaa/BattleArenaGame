@@ -5,22 +5,19 @@ public class Projectile {
     private  double x;
     private double y;
     private double speed;
-    private  double damage;
-
+    private int damage;
     public boolean active = true;
     private Circle view;
     private boolean movingRight;
 
 
-    public Projectile(double x,double y, double speed, boolean movingRight,Circle view,double damage) {
+    public Projectile(double x, double y, double speed, int damage, boolean movingRight) {
         this.x = x;
         this.y = y;
-        this.damage=damage;
-        //complete
         this.speed = speed;
-        this.view = new Circle(x, y,5);
+        this.damage = damage;
         this.movingRight = movingRight;
-
+        this.view = new Circle(x, y, 5);
     }
 
     public double getX() {
@@ -29,7 +26,7 @@ public class Projectile {
 
     public double getY(){return y;}
 
-    public double getDamage() {
+    public int getDamage() {
         return damage;
     }
 
@@ -40,6 +37,11 @@ public class Projectile {
     public Circle getView() {
         return view;
     }
+
+    public boolean movingRight() {
+        return movingRight;
+    }
+
 
     public void move() {
       if (!active) {
@@ -53,22 +55,8 @@ public class Projectile {
     else {
       x = x - speed;
         }
+        view.setCenterX(x);
     }
-
-
-    public boolean checkCollision(Projectile bullet,Fighter Target){
-
-        if (!active) {
-            return false;
-        }
-        double distanceX = Math.abs(x - Target.getX());
-        double distanceY = Math.abs(y - Target.getY());
-
-        return distanceX < 25 && distanceY < 25;
-
-    }
-
-
 }
 
 
