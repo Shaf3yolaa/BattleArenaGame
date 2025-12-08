@@ -5,7 +5,6 @@ import com.battlearena.battlearenagame.models.Fighter;
 public class PhysicsEngine {
     private double w;
     private double h;
-    public boolean active = true;
 
 
     public PhysicsEngine(double w, double h) {
