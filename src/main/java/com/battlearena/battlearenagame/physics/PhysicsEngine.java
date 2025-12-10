@@ -66,8 +66,8 @@ public class PhysicsEngine {
             nextX = w-p2Width;
         if (nextY < 0)
             nextY = 0;
-        if (nextY > h-p2Width)
-            nextY = h-p2Width;
+        if (nextY > h-p2Height)
+            nextY = h-p2Height;
 
         p2.setX(nextX);
         p2.setY(nextY);
