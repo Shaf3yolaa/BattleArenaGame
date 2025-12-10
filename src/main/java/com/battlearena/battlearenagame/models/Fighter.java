@@ -71,18 +71,7 @@ public abstract class Fighter {
     public Weapon getWeapon() { return weapon; }
     public double getSpeed() { return speed; }
 
-
-    public void addWeapon(Weapon w){
-        addWeapon(new Pistol());
-        addWeapon(new Bow());
-        addWeapon(new MagicWand());
-        addWeapon(new Cannon());
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
     }
-    public void cycleWeapons() {
-        if (weapons.size() > 1) {
-            currentWeaponIndex=(currentWeaponIndex+1)%weapons.size();
-            this.weapon=weapons.get(currentWeaponIndex);
-        }
-    }
-
 }

@@ -14,16 +14,6 @@ public class Archer extends Fighter {
     public void shoot() {
         long now = System.currentTimeMillis();
 
-
     }
 
-    @Override
-    public void addWeapon(Weapon w) {
-        super.addWeapon(w);
-    }
-
-    @Override
-    public void cycleWeapons() {
-        super.cycleWeapons();
-    }
 }

@@ -17,13 +17,4 @@ public class Mage extends Fighter {
 
     }
 
-    @Override
-    public void addWeapon(Weapon w) {
-        super.addWeapon(w);
-    }
-
-    @Override
-    public void cycleWeapons() {
-        super.cycleWeapons();
-    }
 }
