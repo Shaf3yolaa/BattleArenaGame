@@ -18,6 +18,8 @@ public class PhysicsEngine {
         double nextX = p1.getX();
         double nextY = p1.getY();
         double speed = p1.getSpeed();
+        double p1Width  = p1.getView().getWidth();
+        double p1Height = p1.getView().getHeight();
 
         if (up)
             nextY -= speed;
@@ -30,12 +32,12 @@ public class PhysicsEngine {
 
         if (nextX < 0)
             nextX = 0;
-        if (nextX > (w / 2) - 40)
-            nextX = (w / 2) - 40;
+        if (nextX > (w/2)-p1Width)
+            nextX = (w/2)-p1Width;
         if (nextY < 0)
             nextY = 0;
-        if (nextY > h - 40)
-            nextY = h - 40;
+        if (nextY > h-p1Height)
+            nextY = h-p1Height;
 
         p1.setX(nextX);
         p1.setY(nextY);
@@ -45,6 +47,8 @@ public class PhysicsEngine {
         double nextX = p2.getX();
         double nextY = p2.getY();
         double speed = p2.getSpeed();
+        double p2Width  = p2.getView().getWidth();
+        double p2Height = p2.getView().getHeight();
 
         if (up)
             nextY -= speed;
@@ -56,14 +60,14 @@ public class PhysicsEngine {
             nextX += speed;
 
 
-        if (nextX < w / 2)
-            nextX = w / 2;
-        if (nextX > w - 40)
-            nextX = w - 40;
+        if (nextX < w/2)
+            nextX = w/2;
+        if (nextX > w-p2Width)
+            nextX = w-p2Width;
         if (nextY < 0)
             nextY = 0;
-        if (nextY > h - 40)
-            nextY = h - 40;
+        if (nextY > h-p2Width)
+            nextY = h-p2Width;
 
         p2.setX(nextX);
         p2.setY(nextY);
