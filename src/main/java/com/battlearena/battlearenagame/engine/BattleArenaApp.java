@@ -141,7 +141,7 @@ public class BattleArenaApp extends Application {
         if (activeKeys.contains(KeyCode.DIGIT7)) player2.setWeapon(new Pistol());
         if (activeKeys.contains(KeyCode.DIGIT8)) player2.setWeapon(new Bow());
         if (activeKeys.contains(KeyCode.DIGIT9)) player2.setWeapon(new Cannon());
-        if (activeKeys.contains(KeyCode.DIGIT0)) player1.setWeapon(new MagicWand());
+        if (activeKeys.contains(KeyCode.DIGIT0)) player2.setWeapon(new MagicWand());
 
         List<Projectile> removeBullet = new ArrayList<>();
 
