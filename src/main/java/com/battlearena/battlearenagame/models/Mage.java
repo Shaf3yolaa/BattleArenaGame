@@ -16,8 +16,6 @@ public class Mage extends Fighter {
         long now = System.currentTimeMillis();
 
 
-        if (canShoot(now)) {
-            System.out.println(this.getName() + " cast a spell!");
-        }
+
     }
 }

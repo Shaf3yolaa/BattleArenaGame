@@ -14,9 +14,7 @@ public class Warrior extends Fighter {
     @Override
     public void shoot() {
         long now = System.currentTimeMillis();
-        if (canShoot(now)) {
-            System.out.println(this.getName() + " fired a shot!");
-        }
+
     }
 
 }

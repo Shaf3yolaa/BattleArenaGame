@@ -14,9 +14,6 @@ public class Archer extends Fighter {
     public void shoot() {
         long now = System.currentTimeMillis();
 
-        if (canShoot(now)) {
-            System.out.println(this.getName() + " fired an arrow!");
 
-        }
     }
 }
