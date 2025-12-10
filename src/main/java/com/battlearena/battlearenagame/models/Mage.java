@@ -20,4 +20,14 @@ public class Mage extends Fighter {
             System.out.println(this.getName() + " cast a spell!");
         }
     }
+
+    @Override
+    public void addWeapon(Weapon w) {
+        super.addWeapon(w);
+    }
+
+    @Override
+    public void cycleWeapons() {
+        super.cycleWeapons();
+    }
 }

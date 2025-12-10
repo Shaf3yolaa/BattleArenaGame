@@ -12,6 +12,16 @@ public class Warrior extends Fighter {
     }
 
     @Override
+    public void addWeapon(Weapon w) {
+        super.addWeapon(w);
+    }
+
+    @Override
+    public void cycleWeapons() {
+        super.cycleWeapons();
+    }
+
+    @Override
     public void shoot() {
         long now = System.currentTimeMillis();
         if (canShoot(now)) {

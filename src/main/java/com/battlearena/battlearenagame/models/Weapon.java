@@ -24,4 +24,5 @@ public class Weapon {
     public long getCoolDownTime() {
         return coolDownTime;
     }
+
 }
