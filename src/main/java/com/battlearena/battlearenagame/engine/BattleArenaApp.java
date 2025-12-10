@@ -30,6 +30,8 @@ public class BattleArenaApp extends Application {
     private Pane gameRoot;
     private Label p1HealthLabel;
     private Label p2HealthLabel;
+    private Label p1WeaponLabel;
+    private Label p2WeaponLabel;
     private Stage window;
     private Scene selectionScene;
     private Scene gameScene;
@@ -92,7 +94,15 @@ public class BattleArenaApp extends Application {
         p2HealthLabel.setLayoutX(680);
         p2HealthLabel.setLayoutY(20);
 
-        gameRoot.getChildren().addAll(player1.getView(), player2.getView(), p1HealthLabel, p2HealthLabel, separator);
+        p1WeaponLabel = new Label("Weapon: " + player1.getWeapon().getClass().getSimpleName());
+        p1WeaponLabel.setLayoutX(20);
+        p1WeaponLabel.setLayoutY(45);
+
+        p2WeaponLabel = new Label("Weapon: " + player2.getWeapon().getClass().getSimpleName());
+        p2WeaponLabel.setLayoutX(680);
+        p2WeaponLabel.setLayoutY(45);
+
+        gameRoot.getChildren().addAll(player1.getView(), player2.getView(), p1HealthLabel, p2HealthLabel, p1WeaponLabel, p2WeaponLabel, separator);
         gameScene = new Scene(gameRoot);
         gameScene.setOnKeyPressed(e -> activeKeys.add(e.getCode()));
         gameScene.setOnKeyReleased(e -> activeKeys.remove(e.getCode()));
@@ -122,6 +132,16 @@ public class BattleArenaApp extends Application {
         if (activeKeys.contains(KeyCode.L) && player2.canShoot(currentTime)) {
             shoot(player2, false);
         }
+
+        if (activeKeys.contains(KeyCode.DIGIT1)) player1.setWeapon(new Pistol());
+        if (activeKeys.contains(KeyCode.DIGIT2)) player1.setWeapon(new Bow());
+        if (activeKeys.contains(KeyCode.DIGIT3)) player1.setWeapon(new Cannon());
+        if (activeKeys.contains(KeyCode.DIGIT4)) player1.setWeapon(new MagicWand());
+
+        if (activeKeys.contains(KeyCode.DIGIT7)) player2.setWeapon(new Pistol());
+        if (activeKeys.contains(KeyCode.DIGIT8)) player2.setWeapon(new Bow());
+        if (activeKeys.contains(KeyCode.DIGIT9)) player2.setWeapon(new Cannon());
+        if (activeKeys.contains(KeyCode.DIGIT0)) player1.setWeapon(new MagicWand());
 
         List<Projectile> removeBullet = new ArrayList<>();
 
@@ -153,6 +173,8 @@ public class BattleArenaApp extends Application {
 
         p1HealthLabel.setText("P1: " + player1.getHealth());
         p2HealthLabel.setText("P2: " + player2.getHealth());
+        p1WeaponLabel.setText("Weapon: " + player1.getWeapon().getClass().getSimpleName());
+        p2WeaponLabel.setText("Weapon: " + player2.getWeapon().getClass().getSimpleName());
 
         if (player1.getHealth() <= 0) endGame("Player 2 Wins!");
         if (player2.getHealth() <= 0) endGame("Player 1 Wins!");
