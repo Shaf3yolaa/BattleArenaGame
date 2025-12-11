@@ -8,7 +8,7 @@ public class Archer extends Fighter {
 
     public Archer(double startX, double startY) {
         super(Defaultname, startX, startY, 100, 5.0, new Bow());
-        this.view.setFill(Color.PINK);
+        this.view.setFill(Color.DEEPPINK);
     }
     @Override
     public void shoot() {
