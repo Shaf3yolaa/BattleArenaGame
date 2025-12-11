@@ -80,9 +80,7 @@ public class BattleArenaApp extends Application {
         physics = new PhysicsEngine(800, 600);
 
         player1 = createFighter(p1Type, 60, 300);
-        player1.getView().setFill(Color.BLUE);
         player2 = createFighter(p2Type, 740, 300);
-        player2.getView().setFill(Color.RED);
 
         Line separator = new Line(400, 0, 400, 600);
 
