@@ -4,20 +4,21 @@ import javafx.scene.shape.Circle;
 public class Projectile {
     private  double x;
     private double y;
-    private double speed;
+    private double velocityX;
+    private double velocityY;
     private int damage;
     public boolean active = true;
     private Circle view;
-    private boolean movingRight;
 
 
-    public Projectile(double x, double y, double speed, int damage, boolean movingRight,double radius) {
+    public Projectile(double x, double y, double speed, int damage, double angleInDegrees,double radius) {
         this.x = x;
         this.y = y;
-        this.speed = speed;
         this.damage = damage;
-        this.movingRight = movingRight;
         this.view = new Circle(x, y, radius);
+        double radians = Math.toRadians(angleInDegrees);
+        this.velocityX = Math.cos(radians) * speed;
+        this.velocityY = Math.sin(radians) * speed;
     }
 
     public double getX() {
@@ -30,32 +31,17 @@ public class Projectile {
         return damage;
     }
 
-    public double getSpeed() {
-        return speed;
-    }
-
     public Circle getView() {
         return view;
     }
 
-    public boolean movingRight() {
-        return movingRight;
-    }
-
-
     public void move() {
-      if (!active) {
-       return;
-        }
+        if (!active) return;
+        x = x+velocityX;
+        y = y+velocityY;
 
-    if (movingRight) {
-
-      x = x + speed;
-    }
-    else {
-      x = x - speed;
-        }
         view.setCenterX(x);
+        view.setCenterY(y);
     }
 }
 
