@@ -14,6 +14,7 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -30,6 +31,8 @@ public class BattleArenaApp extends Application {
     private Pane gameRoot;
     private Label p1HealthLabel;
     private Label p2HealthLabel;
+    private Rectangle p1HealthBar;
+    private Rectangle p2HealthBar;
     private Label p1WeaponLabel;
     private Label p2WeaponLabel;
     private Stage window;
@@ -87,20 +90,28 @@ public class BattleArenaApp extends Application {
         p1HealthLabel = new Label("P1: " + player1.getHealth());
         p1HealthLabel.setLayoutX(20);
         p1HealthLabel.setLayoutY(20);
+        p1HealthBar = new Rectangle(200, 20, Color.GREEN);
+        p1HealthBar.setLayoutX(20);
+        p1HealthBar.setLayoutY(45);
+
 
         p2HealthLabel = new Label("P2: " + player2.getHealth());
         p2HealthLabel.setLayoutX(680);
         p2HealthLabel.setLayoutY(20);
+        p2HealthBar = new Rectangle(200, 20, Color.GREEN);
+        p2HealthBar.setLayoutX(580);
+        p2HealthBar.setLayoutY(45);
+
 
         p1WeaponLabel = new Label("Weapon: " + player1.getWeapon().getClass().getSimpleName());
         p1WeaponLabel.setLayoutX(20);
-        p1WeaponLabel.setLayoutY(45);
+        p1WeaponLabel.setLayoutY(70);
 
         p2WeaponLabel = new Label("Weapon: " + player2.getWeapon().getClass().getSimpleName());
         p2WeaponLabel.setLayoutX(680);
-        p2WeaponLabel.setLayoutY(45);
+        p2WeaponLabel.setLayoutY(70);
 
-        gameRoot.getChildren().addAll(player1.getView(), player2.getView(), p1HealthLabel, p2HealthLabel, p1WeaponLabel, p2WeaponLabel, separator);
+        gameRoot.getChildren().addAll(player1.getView(), player2.getView(), p1HealthLabel, p2HealthLabel,p1HealthBar, p2HealthBar, p1WeaponLabel, p2WeaponLabel, separator);
         gameScene = new Scene(gameRoot);
         gameScene.setOnKeyPressed(e -> activeKeys.add(e.getCode()));
         gameScene.setOnKeyReleased(e -> activeKeys.remove(e.getCode()));
@@ -172,6 +183,12 @@ public class BattleArenaApp extends Application {
 
         p1HealthLabel.setText("P1: " + player1.getHealth());
         p2HealthLabel.setText("P2: " + player2.getHealth());
+        double p1HealthPercent = (double) player1.getHealth() / player1.getMaxHealth();
+        double p2HealthPercent = (double) player2.getHealth() / player2.getMaxHealth();
+        p1HealthBar.setWidth(200 * p1HealthPercent);
+        p2HealthBar.setWidth(200 * p2HealthPercent);
+        p1HealthBar.setFill(p1HealthPercent > 0.5 ? Color.GREEN : (p1HealthPercent > 0.25 ? Color.ORANGE : Color.RED));
+        p2HealthBar.setFill(p2HealthPercent > 0.5 ? Color.GREEN : (p2HealthPercent > 0.25 ? Color.ORANGE : Color.RED));
         p1WeaponLabel.setText("Weapon: " + player1.getWeapon().getClass().getSimpleName());
         p2WeaponLabel.setText("Weapon: " + player2.getWeapon().getClass().getSimpleName());
 

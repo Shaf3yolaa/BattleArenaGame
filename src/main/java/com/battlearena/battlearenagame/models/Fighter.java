@@ -13,6 +13,7 @@ public abstract class Fighter {
     protected long lastShotcdt = 0;
     protected Rectangle view;
     protected double rotation;
+    protected int maxHealth;
 
     public Fighter(String name, double x, double y, int health, double speed, Weapon weapon) {
         this.name = name;
@@ -24,6 +25,7 @@ public abstract class Fighter {
         this.view = new Rectangle(40, 40);
         this.view.setX(x);
         this.view.setY(y);
+        this.maxHealth = health;
     }
 
     //-------------------------------------------------------------------------------shot & damage
@@ -78,4 +80,5 @@ public abstract class Fighter {
     }
 
     public double getRotation() {return rotation;}
+    public int getMaxHealth() { return maxHealth; }
 }
