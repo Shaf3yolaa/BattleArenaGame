@@ -2,8 +2,6 @@ package com.battlearena.battlearenagame.models;
 
 import javafx.scene.shape.Rectangle;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public abstract class Fighter {
 
@@ -14,8 +12,6 @@ public abstract class Fighter {
     protected Weapon weapon;
     protected long lastShotcdt = 0;
     protected Rectangle view;
-    protected List<Weapon>weapons=new ArrayList<>();
-    protected int currentWeaponIndex=0;
 
     public Fighter(String name, double x, double y, int health, double speed, Weapon weapon) {
         this.name = name;
