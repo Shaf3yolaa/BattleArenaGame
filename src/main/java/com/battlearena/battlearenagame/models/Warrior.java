@@ -8,7 +8,7 @@ public class Warrior extends Fighter {
 
     public Warrior(double startX, double startY) {
         super(Defaultname, startX, startY, 100, 5, new Pistol());
-        this.view.setFill(Color.YELLOW);
+        this.view.setFill(Color.BLACK);
     }
 
     @Override
