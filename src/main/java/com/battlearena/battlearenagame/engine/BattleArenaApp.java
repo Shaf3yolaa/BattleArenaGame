@@ -184,7 +184,7 @@ public class BattleArenaApp extends Application {
         double startX = movingRight ? shooter.getX() + 45 : shooter.getX() - 10;
         double startY = shooter.getY() + 20;
 
-        Projectile bullet = new Projectile(startX, startY, shooter.getWeapon().getSpeed(), shooter.getWeapon().getDamage(), movingRight);
+        Projectile bullet = new Projectile(startX, startY, shooter.getWeapon().getSpeed(), shooter.getWeapon().getDamage(), movingRight,shooter.getWeapon().getProjectileSize());
 
         projectiles.add(bullet);
         gameRoot.getChildren().add(bullet.getView());
