@@ -5,6 +5,7 @@ public class Weapon {
     private int damage;
     private int speed;
     protected long coolDownTime;
+    protected int projectileSize;
 
     public Weapon(String name,int damage, int speed, long coolDownTime) {
         this.name = name;
@@ -25,4 +26,7 @@ public class Weapon {
         return coolDownTime;
     }
 
+    public int getProjectileSize() {
+        return projectileSize;
+    }
 }

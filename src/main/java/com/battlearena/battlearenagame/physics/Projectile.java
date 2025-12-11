@@ -11,13 +11,13 @@ public class Projectile {
     private boolean movingRight;
 
 
-    public Projectile(double x, double y, double speed, int damage, boolean movingRight) {
+    public Projectile(double x, double y, double speed, int damage, boolean movingRight,double radius) {
         this.x = x;
         this.y = y;
         this.speed = speed;
         this.damage = damage;
         this.movingRight = movingRight;
-        this.view = new Circle(x, y, 5);
+        this.view = new Circle(x, y, radius);
     }
 
     public double getX() {
