@@ -72,7 +72,7 @@ public abstract class Fighter {
         this.weapon = weapon;
     }
 
-    public void setRotation(double rotation) {
+    public void setRotation(double angle) {
         this.rotation = angle;
         this.view.setRotate(angle);
     }
