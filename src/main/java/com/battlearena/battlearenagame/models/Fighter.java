@@ -12,6 +12,7 @@ public abstract class Fighter {
     protected Weapon weapon;
     protected long lastShotcdt = 0;
     protected Rectangle view;
+    protected double rotation;
 
     public Fighter(String name, double x, double y, int health, double speed, Weapon weapon) {
         this.name = name;
@@ -70,4 +71,11 @@ public abstract class Fighter {
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
     }
+
+    public void setRotation(double rotation) {
+        this.rotation = angle;
+        this.view.setRotate(angle);
+    }
+
+    public double getRotation() {return rotation;}
 }
