@@ -29,6 +29,21 @@ public class PhysicsEngine {
         double pWidth  = p.getView().getWidth();
         double pHeight = p.getView().getHeight();
 
+
+        if (up) p.setRotation(270);
+        if (down) p.setRotation(90);
+        if (left) p.setRotation(180);
+        if (right) p.setRotation(0);
+
+
+        if (up && right) p.setRotation(315);
+        if (up && left) p.setRotation(225);
+        if (down && right) p.setRotation(45);
+        if (down && left) p.setRotation(135);
+
+
+
+
         if (up)
             nextY -= speed;
         if (down)
