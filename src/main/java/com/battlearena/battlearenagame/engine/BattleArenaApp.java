@@ -15,6 +15,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -38,33 +41,67 @@ public class BattleArenaApp extends Application {
     private Stage window;
     private Scene selectionScene;
     private Scene gameScene;
+    private static final double SCREENWIDTH = 1000;
+    private static final double SCREENHEIGHT = 700;
 
     @Override
     public void start(Stage stage) {
         window = stage;
         window.setTitle("Battle Arena Game");
-        VBox layout1 = new VBox(20);
-        layout1.setStyle("-fx-padding: 20; -fx-alignment: center;");
+        Label welcome = new Label("WELCOME TO BATTLE ARENA GAME!");
+        welcome.setStyle("-fx-font-size: 28px;" + "-fx-font-weight: bold;" + "-fx-text-fill: #FFD700;" + "-fx-alignment: center;");
         String[] fighters = {"Warrior", "Mage", "Archer"};
 
         Label p1 = new Label("Player 1:");
+        p1.setTextFill(Color.WHITE);
+        p1.setStyle("-fx-font-weight: bold;");
         ComboBox<String> p1Choice = new ComboBox<>();
         p1Choice.getItems().addAll(fighters);
         p1Choice.setValue("Select a Character");
 
         Label p2 = new Label("Player 2:");
+        p2.setTextFill(Color.WHITE);
+        p2.setStyle("-fx-font-weight: bold;");
         ComboBox<String> p2Choice = new ComboBox<>();
         p2Choice.getItems().addAll(fighters);
         p2Choice.setValue("Select a Character");
 
         Button startButton = new Button("LET'S FIGHT!");
+        startButton.setPrefWidth(160);
+        startButton.setDisable(true);
         startButton.setOnAction(e -> startGame(p1Choice.getValue(), p2Choice.getValue()));
 
-        layout1.getChildren().addAll(p1, p1Choice, p2, p2Choice, startButton);
-        selectionScene = new Scene(layout1, 400, 400);
+        Button aboutButton = new Button("ABOUT GAME");
+        aboutButton.setPrefWidth(160);
+        aboutButton.setOnAction(e -> showAboutInfo());
+
+        Button exitButton = new Button("EXIT");
+        exitButton.setPrefWidth(160);
+        exitButton.setOnAction(e -> window.close());
+
+        p1Choice.valueProperty().addListener((obs, oldV, newV) -> startButton.setDisable(p2Choice.getValue() == null));
+        p2Choice.valueProperty().addListener((obs, oldV, newV) -> startButton.setDisable(p1Choice.getValue() == null));
+
+        startButton.setOnAction(e -> startGame(p1Choice.getValue(), p2Choice.getValue()));
+
+        VBox layout1 = new VBox(20, welcome, p1, p1Choice, p2, p2Choice, startButton, aboutButton, exitButton);
+        layout1.setStyle("-fx-padding: 20; -fx-alignment: center; -fx-background-color: linear-gradient(#202020, #404040);");
+
+        selectionScene = new Scene(layout1, SCREENWIDTH, SCREENHEIGHT);
         window.setScene(selectionScene);
         window.show();
     }
+
+    private void showAboutInfo() {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("About Battle Arena Game");
+        alert.setHeaderText("Developed By:");
+        alert.setContentText(
+                "Engine: Ahmed Elshafeey - Mazen Abdelmoniem" + "\nModels: Seif Eldin Tarek - Mohamed Osama " + "\nPhysics: Ezz Eldin Gamal - Eyad Eshba"
+        );
+        alert.showAndWait();
+    }
+
 
     private Fighter createFighter(String type, double x, double y) {
         switch (type) {
@@ -79,37 +116,45 @@ public class BattleArenaApp extends Application {
 
     private void startGame(String p1Type, String p2Type) {
         gameRoot = new Pane();
-        gameRoot.setPrefSize(800, 600);
-        physics = new PhysicsEngine(800, 600);
+        gameRoot.setPrefSize(SCREENWIDTH, SCREENHEIGHT);
+        physics = new PhysicsEngine(SCREENWIDTH, SCREENHEIGHT);
 
-        player1 = createFighter(p1Type, 60, 300);
-        player2 = createFighter(p2Type, 740, 300);
+        player1 = createFighter(p1Type, 60, SCREENHEIGHT / 2);
+        player2 = createFighter(p2Type, SCREENWIDTH - 60, SCREENHEIGHT / 2);
 
-        Line separator = new Line(400, 0, 400, 600);
+        Line separator = new Line(SCREENWIDTH / 2, 0, SCREENWIDTH / 2, SCREENHEIGHT);
 
         p1HealthLabel = new Label("P1: " + player1.getHealth());
         p1HealthLabel.setLayoutX(20);
         p1HealthLabel.setLayoutY(20);
+        p1HealthLabel.setStyle("-fx-font-weight: bold;");
         p1HealthBar = new Rectangle(200, 20, Color.GREEN);
         p1HealthBar.setLayoutX(20);
         p1HealthBar.setLayoutY(45);
+        p1HealthBar.setStroke(Color.BLACK);
+        p1HealthBar.setStrokeWidth(2);
 
 
         p2HealthLabel = new Label("P2: " + player2.getHealth());
-        p2HealthLabel.setLayoutX(680);
+        p2HealthLabel.setLayoutX(SCREENWIDTH-p2HealthLabel.getWidth()-120);
         p2HealthLabel.setLayoutY(20);
+        p2HealthLabel.setStyle("-fx-font-weight: bold;");
         p2HealthBar = new Rectangle(200, 20, Color.GREEN);
-        p2HealthBar.setLayoutX(580);
+        p2HealthBar.setLayoutX(SCREENWIDTH-p2HealthBar.getWidth()-20);
         p2HealthBar.setLayoutY(45);
+        p2HealthBar.setStroke(Color.BLACK);
+        p2HealthBar.setStrokeWidth(2);
 
 
         p1WeaponLabel = new Label("Weapon: " + player1.getWeapon().getClass().getSimpleName());
         p1WeaponLabel.setLayoutX(20);
         p1WeaponLabel.setLayoutY(70);
+        p1WeaponLabel.setStyle("-fx-font-weight: bold;");
 
         p2WeaponLabel = new Label("Weapon: " + player2.getWeapon().getClass().getSimpleName());
-        p2WeaponLabel.setLayoutX(680);
+        p2WeaponLabel.setLayoutX(SCREENWIDTH-p2WeaponLabel.getWidth()-120);
         p2WeaponLabel.setLayoutY(70);
+        p2WeaponLabel.setStyle("-fx-font-weight: bold;");
 
         gameRoot.getChildren().addAll(player1.getView(), player2.getView(), p1HealthLabel, p2HealthLabel,p1HealthBar, p2HealthBar, p1WeaponLabel, p2WeaponLabel, separator);
         gameScene = new Scene(gameRoot);
@@ -157,7 +202,7 @@ public class BattleArenaApp extends Application {
         for (Projectile bullet : projectiles) {
             bullet.move();
 
-            if (bullet.getX() < 0 || bullet.getX() > 800 || bullet.getY() < 0 || bullet.getY() > 600) {
+            if (bullet.getX() < 0 || bullet.getX() > SCREENWIDTH || bullet.getY() < 0 || bullet.getY() > SCREENHEIGHT) {
                 removeBullet.add(bullet);
                 gameRoot.getChildren().remove(bullet.getView());
                 continue;
@@ -181,8 +226,8 @@ public class BattleArenaApp extends Application {
 
         projectiles.removeAll(removeBullet);
 
-        p1HealthLabel.setText("P1: " + player1.getHealth());
-        p2HealthLabel.setText("P2: " + player2.getHealth());
+        p1HealthLabel.setText(player1.getName() + ": " + player1.getHealth());
+        p2HealthLabel.setText(player2.getName() + ": " + player2.getHealth());
         double p1HealthPercent = (double) player1.getHealth() / player1.getMaxHealth();
         double p2HealthPercent = (double) player2.getHealth() / player2.getMaxHealth();
         p1HealthBar.setWidth(200 * p1HealthPercent);
@@ -192,8 +237,8 @@ public class BattleArenaApp extends Application {
         p1WeaponLabel.setText("Weapon: " + player1.getWeapon().getClass().getSimpleName());
         p2WeaponLabel.setText("Weapon: " + player2.getWeapon().getClass().getSimpleName());
 
-        if (player1.getHealth() <= 0) endGame("Player 2 Wins!");
-        if (player2.getHealth() <= 0) endGame("Player 1 Wins!");
+        if (player1.getHealth() <= 0) endGame(player2.getName() + " (P2) Wins!");
+        if (player2.getHealth() <= 0) endGame(player1.getName() + " (P1) Wins!");
     }
 
     private void shoot(Fighter shooter) {
@@ -210,8 +255,8 @@ public class BattleArenaApp extends Application {
         gameRunning = false;
         Label winLabel = new Label(message);
         winLabel.setStyle("-fx-font-size: 40px; -fx-text-fill: green; -fx-font-weight: bold; -fx-background-color: white; -fx-padding: 10px;");
-        winLabel.setLayoutX(250);
-        winLabel.setLayoutY(250);
+        winLabel.setLayoutX(SCREENWIDTH/2-200);
+        winLabel.setLayoutY(SCREENHEIGHT/2-50);
         gameRoot.getChildren().add(winLabel);
     }
 }
