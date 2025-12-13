@@ -82,7 +82,7 @@ public class BattleArenaApp extends Application {
         p1Choice.valueProperty().addListener((obs, oldV, newV) -> startButton.setDisable(p2Choice.getValue() == null));
         p2Choice.valueProperty().addListener((obs, oldV, newV) -> startButton.setDisable(p1Choice.getValue() == null));
 
-        startButton.setOnAction(e -> startGame(p1Choice.getValue(), p2Choice.getValue()));
+        startButton.setOnAction(e -> showInstructions(p1Choice.getValue(), p2Choice.getValue()));
 
         VBox layout1 = new VBox(20, welcome, p1, p1Choice, p2, p2Choice, startButton, aboutButton, exitButton);
         layout1.setStyle("-fx-padding: 20; -fx-alignment: center; -fx-background-color: linear-gradient(#202020, #404040);");
@@ -112,6 +112,51 @@ public class BattleArenaApp extends Application {
             default:
                 return new Warrior(x, y);
         }
+    }
+
+    private void showInstructions(String p1Type, String p2Type) {
+        gameRoot = new Pane();
+        gameRoot.setPrefSize(SCREENWIDTH, SCREENHEIGHT);
+        gameRoot.setStyle("-fx-background-color: linear-gradient(#202020, #404040);");
+
+        Label p1Instr = new Label("PLAYER 1 Controls:\nW = Up\nS = Down\nA = Left\nD = Right\nF = Shoot");
+        p1Instr.setTextFill(Color.WHITE);
+        p1Instr.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-alignment: left;");
+        p1Instr.setLayoutX(50);
+        p1Instr.setLayoutY(SCREENHEIGHT / 2 - 100);
+
+        Label p2Instr = new Label("PLAYER 2 Controls:\n↑ = Up\n↓ = Down\n← = Left\n→ = Right\nL = Shoot");
+        p2Instr.setTextFill(Color.WHITE);
+        p2Instr.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-alignment: right;");
+        p2Instr.setLayoutX(SCREENWIDTH - 200);
+        p2Instr.setLayoutY(SCREENHEIGHT / 2 - 100);
+
+        Label pressKeyLabel = new Label("Press any key to start!");
+        pressKeyLabel.setTextFill(Color.WHITE);
+        pressKeyLabel.setStyle("-fx-font-size: 28px; -fx-font-weight: bold;");
+        pressKeyLabel.setLayoutX(SCREENWIDTH / 2 - 150);
+        pressKeyLabel.setLayoutY(SCREENHEIGHT / 2 + 50);
+
+        gameRoot.getChildren().addAll(p1Instr, p2Instr, pressKeyLabel);
+        Scene instructionsScene = new Scene(gameRoot, SCREENWIDTH, SCREENHEIGHT);
+        window.setScene(instructionsScene);
+        instructionsScene.setOnKeyPressed(e -> showFight(p1Type, p2Type));
+    }
+
+    private void showFight(String p1Type, String p2Type) {
+        gameRoot.getChildren().clear();
+
+        Label fightLabel = new Label("FIGHT!");
+        fightLabel.setTextFill(Color.RED);
+        fightLabel.setStyle("-fx-font-size: 60px; -fx-font-weight: bold;");
+        fightLabel.setLayoutX(SCREENWIDTH/2-80);
+        fightLabel.setLayoutY(SCREENHEIGHT/2-50);
+        gameRoot.getChildren().add(fightLabel);
+
+        new Thread(() -> {
+            try { Thread.sleep(1000); } catch (InterruptedException ex) {}
+            javafx.application.Platform.runLater(() -> startGame(p1Type, p2Type));
+        }).start();
     }
 
     private void startGame(String p1Type, String p2Type) {
