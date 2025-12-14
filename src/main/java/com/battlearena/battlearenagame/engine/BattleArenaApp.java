@@ -169,7 +169,7 @@ public class BattleArenaApp extends Application {
 
         Line separator = new Line(SCREENWIDTH / 2, 0, SCREENWIDTH / 2, SCREENHEIGHT);
 
-        p1HealthLabel = new Label("P1: " + player1.getHealth());
+        p1HealthLabel = new Label(p1HealthLabel.setText(player1.getName() + ": " + player1.getHealth());
         p1HealthLabel.setLayoutX(20);
         p1HealthLabel.setLayoutY(20);
         p1HealthLabel.setStyle("-fx-font-weight: bold;");
@@ -180,7 +180,7 @@ public class BattleArenaApp extends Application {
         p1HealthBar.setStrokeWidth(2);
 
 
-        p2HealthLabel = new Label("P2: " + player2.getHealth());
+        p2HealthLabel = new Label(p1HealthLabel.setText(player1.getName() + ": " + player2.getHealth());
         p2HealthLabel.setLayoutX(SCREENWIDTH-p2HealthLabel.getWidth()-120);
         p2HealthLabel.setLayoutY(20);
         p2HealthLabel.setStyle("-fx-font-weight: bold;");
