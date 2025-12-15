@@ -302,6 +302,33 @@ public class BattleArenaApp extends Application {
         winLabel.setStyle("-fx-font-size: 40px; -fx-text-fill: green; -fx-font-weight: bold; -fx-background-color: white; -fx-padding: 10px;");
         winLabel.setLayoutX(SCREENWIDTH/2-200);
         winLabel.setLayoutY(SCREENHEIGHT/2-50);
-        gameRoot.getChildren().add(winLabel);
+
+        Button restartBtn = new Button("Play Again");
+        restartBtn.setPrefWidth(180);
+        restartBtn.setLayoutX(SCREENWIDTH / 2 - 90);
+        restartBtn.setLayoutY(SCREENHEIGHT / 2 - 40);
+        restartBtn.setOnAction(e -> {
+            projectiles.clear();
+            activeKeys.clear();
+            startGame(player1.getName(), player2.getName());
+        });
+
+        Button menuBtn = new Button("Return to Main Menu");
+        menuBtn.setPrefWidth(180);
+        menuBtn.setLayoutX(SCREENWIDTH / 2 - 90);
+        menuBtn.setLayoutY(SCREENHEIGHT / 2 + 10);
+        menuBtn.setOnAction(e -> {
+            projectiles.clear();
+            activeKeys.clear();
+            window.setScene(selectionScene);
+        });
+
+        Button exitBtn = new Button("Exit");
+        exitBtn.setPrefWidth(180);
+        exitBtn.setLayoutX(SCREENWIDTH / 2 - 90);
+        exitBtn.setLayoutY(SCREENHEIGHT / 2 + 60);
+        exitBtn.setOnAction(e -> window.close());
+
+        gameRoot.getChildren().addAll(winLabel, restartBtn, menuBtn, exitBtn);
     }
 }
