@@ -12,7 +12,7 @@ public class Archer extends Fighter {
     }
     @Override
     public void shoot() {
-        long now = System.currentTimeMillis();
+        System.out.println("Archer shoots an arrow!");
 
     }
 

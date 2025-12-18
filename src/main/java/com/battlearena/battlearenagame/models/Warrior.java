@@ -10,11 +10,9 @@ public class Warrior extends Fighter {
         super(Defaultname, startX, startY, 100, 5, new Pistol());
         this.view.setFill(Color.BLACK);
     }
-
     @Override
     public void shoot() {
-        long now = System.currentTimeMillis();
-
+        System.out.println("Warrior shoots a bullet!");
     }
 
 }

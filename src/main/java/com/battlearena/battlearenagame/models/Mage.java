@@ -13,8 +13,7 @@ public class Mage extends Fighter {
     }
     @Override
     public void shoot() {
-        long now = System.currentTimeMillis();
-
+        System.out.println("Mage uses his magic wand!");
     }
 
 }
