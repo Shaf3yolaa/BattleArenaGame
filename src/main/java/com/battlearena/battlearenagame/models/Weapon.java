@@ -4,7 +4,7 @@ public class Weapon {
     private String name;
     private int damage;
     private int speed;
-    protected long coolDownTime;
+    private long coolDownTime;
     protected int projectileSize;
 
     public Weapon(String name,int damage, int speed, long coolDownTime) {

@@ -28,7 +28,6 @@ public abstract class Fighter {
         this.maxHealth = health;
     }
 
-    //-------------------------------------------------------------------------------shot & damage
     public void takeDamage(int dmg) {
         this.health -= dmg;
         if (this.health < 0) this.health = 0;
@@ -42,16 +41,7 @@ public abstract class Fighter {
         }
         return false;
     }
-    public void recordShotTime(long currentTime) {
-        this.lastShotcdt = currentTime;
-    }
 
-
-    public boolean isDead() {
-        return health <= 0;
-    }
-
-    // ---------------------------------------------------------------------Getters and Setters
     public String getName() { return name; }
     public double getX() { return x; }
     public double getY() { return y; }

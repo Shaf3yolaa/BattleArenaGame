@@ -68,7 +68,6 @@ public class BattleArenaApp extends Application {
 
         Button startButton = new Button("LET'S FIGHT!");
         startButton.setPrefWidth(160);
-        startButton.setDisable(true);
         startButton.setOnAction(e -> startGame(p1Choice.getValue(), p2Choice.getValue()));
 
         Button aboutButton = new Button("ABOUT GAME");
@@ -78,9 +77,6 @@ public class BattleArenaApp extends Application {
         Button exitButton = new Button("EXIT");
         exitButton.setPrefWidth(160);
         exitButton.setOnAction(e -> window.close());
-
-        p1Choice.valueProperty().addListener((obs, oldV, newV) -> startButton.setDisable(p2Choice.getValue() == null));
-        p2Choice.valueProperty().addListener((obs, oldV, newV) -> startButton.setDisable(p1Choice.getValue() == null));
 
         startButton.setOnAction(e -> showInstructions(p1Choice.getValue(), p2Choice.getValue()));
 
@@ -191,12 +187,12 @@ public class BattleArenaApp extends Application {
         p2HealthBar.setStrokeWidth(2);
 
 
-        p1WeaponLabel = new Label("Weapon: " + player1.getWeapon().getClass().getSimpleName());
+        p1WeaponLabel = new Label("Weapon: " + player1.getWeapon().getName());
         p1WeaponLabel.setLayoutX(20);
         p1WeaponLabel.setLayoutY(70);
         p1WeaponLabel.setStyle("-fx-font-weight: bold;");
 
-        p2WeaponLabel = new Label("Weapon: " + player2.getWeapon().getClass().getSimpleName());
+        p2WeaponLabel = new Label("Weapon: " + player2.getWeapon().getName());
         p2WeaponLabel.setLayoutX(SCREENWIDTH-p2WeaponLabel.getWidth()-120);
         p2WeaponLabel.setLayoutY(70);
         p2WeaponLabel.setStyle("-fx-font-weight: bold;");
@@ -279,8 +275,8 @@ public class BattleArenaApp extends Application {
         p2HealthBar.setWidth(200 * p2HealthPercent);
         p1HealthBar.setFill(p1HealthPercent > 0.5 ? Color.GREEN : (p1HealthPercent > 0.25 ? Color.ORANGE : Color.RED));
         p2HealthBar.setFill(p2HealthPercent > 0.5 ? Color.GREEN : (p2HealthPercent > 0.25 ? Color.ORANGE : Color.RED));
-        p1WeaponLabel.setText("Weapon: " + player1.getWeapon().getClass().getSimpleName());
-        p2WeaponLabel.setText("Weapon: " + player2.getWeapon().getClass().getSimpleName());
+        p1WeaponLabel.setText("Weapon: " + player1.getName());
+        p2WeaponLabel.setText("Weapon: " + player2.getName());
 
         if (player1.getHealth() <= 0) endGame(player2.getName() + " (P2) Wins!");
         if (player2.getHealth() <= 0) endGame(player1.getName() + " (P1) Wins!");
