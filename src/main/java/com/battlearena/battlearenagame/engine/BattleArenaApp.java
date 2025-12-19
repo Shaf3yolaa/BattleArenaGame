@@ -193,7 +193,7 @@ public class BattleArenaApp extends Application {
         p1WeaponLabel.setStyle("-fx-font-weight: bold;");
 
         p2WeaponLabel = new Label("Weapon: " + player2.getWeapon().getName());
-        p2WeaponLabel.setLayoutX(SCREENWIDTH-p2WeaponLabel.getWidth()-120);
+        p2WeaponLabel.setLayoutX(SCREENWIDTH-p2WeaponLabel.getWidth()-150);
         p2WeaponLabel.setLayoutY(70);
         p2WeaponLabel.setStyle("-fx-font-weight: bold;");
 
