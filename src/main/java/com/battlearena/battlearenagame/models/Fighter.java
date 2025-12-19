@@ -5,15 +5,15 @@ import javafx.scene.shape.Rectangle;
 
 public abstract class Fighter {
 
-    protected String name;
-    protected double x, y;
-    protected int health;
-    protected double speed;
-    protected Weapon weapon;
-    protected long lastShotcdt = 0;
+    private String name;
+    private double x, y;
+    private int health;
+    private double speed;
+    private Weapon weapon;
+    private long lastShotcdt = 0;
     protected Rectangle view;
-    protected double rotation;
-    protected int maxHealth;
+    private double rotation;
+    private int maxHealth;
 
     public Fighter(String name, double x, double y, int health, double speed, Weapon weapon) {
         this.name = name;
