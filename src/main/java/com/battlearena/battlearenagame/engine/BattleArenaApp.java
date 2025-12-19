@@ -275,8 +275,8 @@ public class BattleArenaApp extends Application {
         p2HealthBar.setWidth(200 * p2HealthPercent);
         p1HealthBar.setFill(p1HealthPercent > 0.5 ? Color.GREEN : (p1HealthPercent > 0.25 ? Color.ORANGE : Color.RED));
         p2HealthBar.setFill(p2HealthPercent > 0.5 ? Color.GREEN : (p2HealthPercent > 0.25 ? Color.ORANGE : Color.RED));
-        p1WeaponLabel.setText("Weapon: " + player1.getName());
-        p2WeaponLabel.setText("Weapon: " + player2.getName());
+        p1WeaponLabel.setText("Weapon: " + player1.getWeapon().getName());
+        p2WeaponLabel.setText("Weapon: " + player2.getWeapon().getName());
 
         if (player1.getHealth() <= 0) endGame(player2.getName() + " (P2) Wins!");
         if (player2.getHealth() <= 0) endGame(player1.getName() + " (P1) Wins!");
